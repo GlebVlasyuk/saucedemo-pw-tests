@@ -5,3 +5,4 @@ node_modules/
 /playwright/.cache/
 .typo
 tests.log
+local.log
