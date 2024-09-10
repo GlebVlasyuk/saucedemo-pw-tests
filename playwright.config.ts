@@ -1,5 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-
+import { getCdpEndpoint } from './browserstack.config.ts';
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -13,8 +13,15 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
+
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
+
+  globalSetup: require.resolve('./global-setup'),
+  globalTeardown: require.resolve('./global-teardown'),
+
+  timeout: 90 * 1000,
+  
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -29,10 +36,17 @@ export default defineConfig({
   },
 
   projects: [
+    // {
+    //   name: 'chromium',
+    //   use: { ...devices['Desktop Chrome'] },
+    // },
+
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
+      name: 'chrome@latest:Windows 11',
+      use: {
+        connectOptions: { wsEndpoint: getCdpEndpoint('chrome@latest:Windows 11', 'test1') },
+      },
+    }
 
     /* Test against branded browsers. */
     // {

@@ -2,7 +2,9 @@
   "name": "saucedemo-pw-tests",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "npx playwright test"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -13,6 +15,7 @@
     "@types/node": "^22.5.1",
     "@typescript-eslint/eslint-plugin": "^8.3.0",
     "@typescript-eslint/parser": "^8.3.0",
+    "browserstack-local": "^1.5.1",
     "eslint": "^9.9.1",
     "globals": "^15.9.0",
     "log4js": "^6.9.1",
