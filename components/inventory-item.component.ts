@@ -29,14 +29,16 @@ export class InventoryItem {
 
     #getItemContainerLocator(containerIdentifier: string|number): Locator {
         // consider containerIdentifier as item name
+        const itemContainer = this.page
+        .getByTestId("inventory-item");
         if(typeof containerIdentifier === 'string') {
-            return this.page.locator(
-                `//*[text()="${containerIdentifier}"]/../../../..`
-              );
+            return itemContainer.filter({has: this.page.getByText(containerIdentifier)})
+            // return this.page.locator(
+            //     `//*[text()="${containerIdentifier}"]/../../../..`
+            //   );
         }
         // consider containerIdentifier as item by index in list
-        return this.page
-        .getByTestId("inventory-item")
+        return itemContainer
         .nth(containerIdentifier);
     }
 

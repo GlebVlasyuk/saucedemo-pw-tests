@@ -1,5 +1,5 @@
-
 import config from './support/config';
+import { logger } from './utils/logger';
 
 // BrowserStack Specific Capabilities.
 // Set 'browserstack.local:true For Local testing
@@ -38,7 +38,7 @@ const BS_LOCAL_ARGS = {
 function getCdpEndpoint(name: string, title: string): string {
     patchCaps(name, title);    
     const cdpUrl = `wss://cdp.browserstack.com/playwright?caps=${encodeURIComponent(JSON.stringify(caps))}`
-    console.log(`--> ${cdpUrl}`)
+    logger.debug(`--> ${cdpUrl}`)
     return cdpUrl;
 }
 

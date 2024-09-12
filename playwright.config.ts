@@ -14,13 +14,17 @@ export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
 
+  expect: {
+    timeout: 10000,
+  },
+
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
 
-  globalSetup: require.resolve('./global-setup'),
-  globalTeardown: require.resolve('./global-teardown'),
+  // globalSetup: require.resolve('./global-setup'),
+  // globalTeardown: require.resolve('./global-teardown'),
 
-  timeout: 90 * 1000,
+  timeout: 60000,
   
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
@@ -36,10 +40,10 @@ export default defineConfig({
   },
 
   projects: [
-    // {
-    //   name: 'chromium',
-    //   use: { ...devices['Desktop Chrome'] },
-    // },
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+    },
 
     {
       name: 'chrome@latest:Windows 11',

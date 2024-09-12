@@ -85,7 +85,7 @@ export class CheckoutStepOnePage extends BasePage {
     ).toBeEnabled();
     await expect
       .soft(this.firstNameInput, "First name input should be empty be default")
-      .toHaveValue("");
+      .toBeEmpty();
     await expect(
       this.lastNameInput,
       "Last name input should be visible"
@@ -96,7 +96,7 @@ export class CheckoutStepOnePage extends BasePage {
     ).toBeEnabled();
     await expect
       .soft(this.lastNameInput, "Last name input should be empty be default")
-      .toHaveValue("");
+      .toBeEmpty();
     await expect(
       this.postalCodeInput,
       "Postal code input should be visible"
@@ -110,7 +110,7 @@ export class CheckoutStepOnePage extends BasePage {
         this.postalCodeInput,
         "Postal code input should be empty be default"
       )
-      .toHaveValue("");
+      .toBeEmpty();
     await expect
       .soft(
         this.postalCodeInput,
