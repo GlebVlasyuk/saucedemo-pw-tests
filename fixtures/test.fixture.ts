@@ -1,6 +1,6 @@
 import {test as base} from './base-test.fixture'
 import { LoginPage, InventoryPage, CartPage, CheckoutCompletePage, CheckoutStepOnePage, CheckoutStepTwoPage } from '../pages';
-import {ESupportedUsers, ESupportedPassword} from '../support/enums/supported-user-creds';
+import {EValidUsers, EInvalidUsers, ESupportedPassword} from '../support/enums/supported-user-creds';
 import { Page } from '@playwright/test';
 
 type TPages = {
@@ -13,7 +13,7 @@ type TPages = {
     loginAsStandartUser: () => Promise<void>,
 };
 
-const loginAs = async (page: Page, username: ESupportedUsers, password: ESupportedPassword): Promise<void> => {
+const loginAs = async (page: Page, username: EValidUsers | EInvalidUsers, password: ESupportedPassword): Promise<void> => {
     const loginPage = new LoginPage(page);
     await loginPage.open();
     await loginPage.login(username, password);
@@ -41,14 +41,14 @@ export const test = base.extend<TPages>({
     },
     loginAsStandartUser: async ({page}, use) => {
         const loginAsStandartUser = async () => {
-            await loginAs(page, ESupportedUsers.STANDART_USER, ESupportedPassword.PASSWORD);
+            await loginAs(page, EValidUsers.STANDART_USER, ESupportedPassword.PASSWORD);
         };
         await use(loginAsStandartUser);
     },
-    loginAsErrorUser: async ({page}, use) => {
-        const loginAsErrorUser = async () => {
-            await loginAs(page, ESupportedUsers.ERROR_USER, ESupportedPassword.PASSWORD);
+    loginAsLockedUser: async ({page}, use) => {
+        const loginAsLockedUser = async () => {
+            await loginAs(page, EInvalidUsers.LOCKED_OUT_USER, ESupportedPassword.PASSWORD);
         };
-        await use(loginAsErrorUser);
+        await use(loginAsLockedUser);
     },
 });

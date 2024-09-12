@@ -58,8 +58,8 @@ export class LoginPage extends BasePage {
         await expect(this.loginButton, 'Login button should be visible').toBeVisible();
         await expect(this.loginButton, 'Login button should be enabled').toBeEnabled();
 
-        await expect.soft(this.usernameInput, 'Username login input should be empty by default').toHaveValue('');
-        await expect.soft(this.passwordInput, 'Password login input should be empty by default').toHaveValue('');
+        await expect.soft(this.usernameInput, 'Username login input should be empty by default').toBeEmpty();
+        await expect.soft(this.passwordInput, 'Password login input should be empty by default').toBeEmpty();
         await expect.soft(this.loginButton, 'Login button should be have correct text').toHaveText('Login');
                 // TODO add to fixtures
         await expect.soft(this.loginButton, 'Login button should be have coorect color').toHaveCSS('background-color', 'rgb(61, 220, 145)');
